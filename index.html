@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿CHI ME AMAAAAAS?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap');
+
+        /* Colores pasteles */
+        :root {
+            --color-fondo-base: #f9f7f7;
+            --color-principal: #ffadad;
+            --color-secundario: #ffd6a5;
+            --color-texto: #3c3c3c;
+            --color-no: #a0c4ff;
+            --color-si: #bdb2ff;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--color-texto);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            text-align: center;
+            overflow-x: hidden;
+            
+            /* Degradado de fondo pastel */
+            background: linear-gradient(135deg, var(--color-fondo-base) 0%, #fae7e7 50%, #f0e6ff 100%);
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            color: var(--color-principal);
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .contenedor-botones {
+            width: 500px; 
+            height: 150px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative; 
+            max-width: 90%;
+        }
+
+        .boton-opcion {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            width: 150px;
+            text-align: center;
+        }
+
+        /* Quitamos el hover para evitar reacción al cursor de escritorio */
+        .boton-opcion:hover {
+            transform: none; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Efecto al presionar (funciona para click y toque en móvil) */
+        .boton-opcion:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .boton-no {
+            background-color: var(--color-no);
+            color: white;
+            /* El botón ÑO es estático */
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .boton-si {
+            background-color: var(--color-si);
+            color: white;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Estilos de los anuncios/modales */
+        .anuncio-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .anuncio-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .anuncio-contenido {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 80%;
+            text-align: center;
+            font-size: 1.2em;
+            border: 5px solid var(--color-principal);
+        }
+
+        .anuncio-contenido h2 {
+            font-family: 'Pacifico', cursive;
+            color: var(--color-principal);
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+
+        .cerrar-anuncio {
+            background-color: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cerrar-anuncio:hover {
+            background-color: #ffc18c;
+        }
+        
+        /* Estilo de la imagen */
+        .imagen-fondo {
+            max-width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--color-si);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¿CHI ME AMAAAAAS? 🥺</h1>
+
+    <div class="contenedor-botones">
+        <button id="btnNo" class="boton-opcion boton-no">
+            ÑO 😭
+        </button>
+
+        <button id="btnSi" class="boton-opcion boton-si">
+            CHIIII ❤️
+        </button>
+    </div>
+
+    <img src="imagen.jpg" alt="Una imagen linda" class="imagen-fondo">
+
+    <div id="anuncioNo" class="anuncio-overlay">
+        <div class="anuncio-contenido">
+            <h2>¡Esa no es la respuesta correcta mi niña! 😡</h2>
+            </div>
+    </div>
+
+    <div id="anuncioSi" class="anuncio-overlay">
+        <div class="anuncio-contenido">
+            <h2>¡Qué linda! 😍</h2>
+            <p>Yo también te amo mi niña, eres tan linda conmigo que nada en este mundo podría hacerme cambiar de opinión sobre lo que siento por ti.</p>
+            <button id="cerrarAnuncioSi" class="cerrar-anuncio">
+                Cerrar ❤️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+        const anuncioNo = document.getElementById('anuncioNo');
+        const anuncioSi = document.getElementById('anuncioSi');
+        const cerrarAnuncioSi = document.getElementById('cerrarAnuncioSi');
+        const contenedorBotones = document.querySelector('.contenedor-botones');
+
+        let contadorIntentos = 0;
+        const intentosMaximos = 15; 
+
+        // --- Funcionalidad del botón 'ÑO' ---
+        btnNo.addEventListener('click', () => {
+            // Muestra el anuncio
+            anuncioNo.classList.add('visible');
+            
+            // Quita el anuncio después de 5 segundos
+            setTimeout(() => {
+                anuncioNo.classList.remove('visible');
+            }, 5000);
+        });
+
+        // --- Funcionalidad del botón 'CHIIII' ---
+        btnSi.addEventListener('click', manejarClickSi);
+
+        function moverBotonSi() {
+            if (contadorIntentos < intentosMaximos) {
+                const contRect = contenedorBotones.getBoundingClientRect();
+                const btnWidth = btnSi.offsetWidth;
+                const btnHeight = btnSi.offsetHeight;
+
+                const maxX = contRect.width - btnWidth;
+                const maxY = contRect.height - btnHeight;
+                
+                // Genera nuevas posiciones aleatorias
+                const newX = Math.random() * maxX;
+                const newY = Math.random() * maxY;
+
+                // Aplica el movimiento
+                btnSi.style.left = `${newX}px`;
+                btnSi.style.top = `${newY}px`;
+                btnSi.style.transform = 'translateY(0)'; 
+
+                contadorIntentos++;
+            }
+        }
+
+        function manejarClickSi() {
+            // Se mueve y cuenta si aún no llega al límite
+            if (contadorIntentos < intentosMaximos) {
+                 moverBotonSi();
+                 console.log(`Intento: ${contadorIntentos} de ${intentosMaximos}`);
+            } 
+            
+            // Si el intento *fue* el 15 (o lo supera por seguridad), muestra el anuncio final
+            if (contadorIntentos >= intentosMaximos) {
+                anuncioSi.classList.add('visible');
+                // Desactiva el evento de click para que ya no se mueva
+                btnSi.removeEventListener('click', manejarClickSi); 
+            }
+        }
+
+        // --- Funcionalidad de cerrar el anuncio 'CHIIII' ---
+        cerrarAnuncioSi.addEventListener('click', () => {
+            anuncioSi.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>
